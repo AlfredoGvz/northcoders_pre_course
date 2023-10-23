@@ -254,6 +254,39 @@ function validMobileNumber(mobileNumber) {
   return false;
 }
 
-console.log(validMobileNumber(mobile));
+// console.log(validMobileNumber(mobile));
 
-//Making changes
+//===========================================================================
+//Challenge 11 - Simming the digits in a string
+function sumDigitsFromString(string) {
+  // Your code goes here...
+  const filtering = string
+    .split("")
+    .filter((element) => {
+      if (element.charCodeAt(0) >= 48 && element.charCodeAt(0) <= 58) {
+        return element;
+      }
+    })
+    .map((element) => Number(element));
+
+  return filtering.length > 0
+    ? filtering.reduce((sum, value) => (sum += value))
+    : 0;
+}
+
+const numInStr = "ad234kj";
+
+// console.log(sumDigitsFromString(numInStr));
+
+//============================================================================
+//Challenge 12 - Calling all wiliams!
+function getWilliams(names) {
+  // Your code goes here...
+  const filteredWilliams = names.filter((element) =>
+    element.endsWith("Williams")
+  );
+  return filteredWilliams;
+}
+const arrayOfNames = ["David", "Sarah"];
+
+console.log(getWilliams(arrayOfNames));
