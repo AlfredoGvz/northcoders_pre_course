@@ -342,6 +342,7 @@ function generateMatrix(number) {
 
   for (let i = 1; i <= number; i++) {
     const nested = Array.from({ length: number }, () => null);
+    // nested.fill(null, 2); ==> This line of code is not necessary
     theMatrixHolder.push(nested);
   }
   return theMatrixHolder;
