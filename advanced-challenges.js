@@ -222,7 +222,7 @@ const strToEdit = "Hellow THere!";
 // console.log(replaceLettersWithXs(strToEdit));
 
 //======================================================================
-//Challenge 10 - Please Enter a Valid Mobile Number
+//Challenge 10 - Please Enter a Valid Mobile Number (completed)
 /*
 1- Write a function that takes a string of a mobile number
 2- If it is a valid UK number, return true, otherwise return false
@@ -257,7 +257,7 @@ function validMobileNumber(mobileNumber) {
 // console.log(validMobileNumber(mobile));
 
 //===========================================================================
-//Challenge 11 - Simming the digits in a string
+//Challenge 11 - Summing the digits in a string (completed)
 function sumDigitsFromString(string) {
   // Your code goes here...
   const filtering = string
@@ -279,7 +279,7 @@ const numInStr = "ad234kj";
 // console.log(sumDigitsFromString(numInStr));
 
 //============================================================================
-//Challenge 12 - Calling all wiliams!
+//Challenge 12 - Calling all wiliams! (completed)
 function getWilliams(names) {
   // Your code goes here...
   const filteredWilliams = names.filter((element) =>
@@ -289,4 +289,63 @@ function getWilliams(names) {
 }
 const arrayOfNames = ["David", "Sarah"];
 
-console.log(getWilliams(arrayOfNames));
+// console.log(getWilliams(arrayOfNames));
+
+//===========================================================================
+//Challenge 13 - Getting Factorials (completed)
+const factorialOf = [5, 4];
+
+function getFactorials(nums) {
+  // Your code goes here...
+  const arrFactorials = [];
+  for (const number of nums) {
+    let val = 1;
+    for (let i = 1; i <= number; i++) {
+      val *= i;
+    }
+    arrFactorials.push(val);
+  }
+  return arrFactorials;
+}
+
+// console.log(getFactorials(factorialOf));
+//===========================================================================
+//Challenge 14 - Find the largest number
+
+const aNumber = 43;
+
+function largestNumber(number) {
+  // Your code goes here...
+  const aNumberToArr = number
+    .toString()
+    .split("")
+    .sort((a, b) => b - a)
+    .join("");
+
+  return Number(aNumberToArr);
+}
+
+// console.log(largestNumber(aNumber));
+
+//========================================================================
+//Challenge 15 - Enter The Matrix
+/*
+1- Write a function that takes a number and returns a matrix of nested arrays
+2- Number of nested arrays should be equal to the number passed 
+3- Each element in the sub-arrays should be set to null
+*/
+
+function generateMatrix(number) {
+  // Your code goes here...
+
+  const theMatrixHolder = [];
+
+  for (let i = 1; i <= number; i++) {
+    const nested = Array.from({ length: number }, () => null);
+    // nested.fill(null, 2); ==> This line of code is not necessary
+    theMatrixHolder.push(nested);
+  }
+  return theMatrixHolder;
+}
+const elementsInMatrix = 3;
+console.log(generateMatrix(elementsInMatrix));
