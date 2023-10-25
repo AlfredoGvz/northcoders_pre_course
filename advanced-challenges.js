@@ -346,6 +346,55 @@ function generateMatrix(number) {
     theMatrixHolder.push(nested);
   }
   return theMatrixHolder;
+
+  //const matrix = Array.from({length:3}, ()=> Array.from({length:3}, null))
 }
 const elementsInMatrix = 3;
-console.log(generateMatrix(elementsInMatrix));
+// console.log(generateMatrix(elementsInMatrix));
+
+function findWrongWayFruit() {
+  // Your code goes here...
+  if (orchard < 3) {
+    return 0;
+  }
+  //From line 366 - 372 we are sorting out the most common value
+  //Given that all the fruits in the orchard are apples, the one
+  //that we need to find index of will be the fruit that is spelled
+  //backwards, which will be the most uncommon value.
+  //So the whole new Map() and for...of loop is just to single out
+  //that words spelled backwards.
+  const fruitCounts = new Map();
+  for (const fruit of orchard) {
+    if (!fruitCounts.has(fruit)) {
+      fruitCounts.set(fruit, 0);
+    }
+    fruitCounts.set(fruit, fruitCounts.get(fruit) + 1);
+    /*
+An equivalent to the above code: 
+
+for (const fruit of orchard) {
+  const added = fruitCounts.get(fruit) || 0;
+  fruitCounts.set(fruit, added + 1);
+}*/
+  }
+
+  // Find the most common fruit.
+  const mostCommonFruit = Array.from(fruitCounts.keys()).find(
+    (fruit) => fruitCounts.get(fruit) === Math.max(...fruitCounts.values())
+  );
+
+  // Find the index of the wrong fruit.
+  return orchard.findIndex((fruit) => fruit !== mostCommonFruit);
+}
+// console.log(findWrongWayFruit(orchard));
+
+const orchard = ["apple", "apple", "apple", "elppa", "apple", "apple"];
+
+const frutaCount = new Map();
+
+for (const fruit of orchard) {
+  const count = frutaCount.get(fruit) || 0;
+  frutaCount.set(fruit, count + 1);
+  // console.log(count);
+}
+console.log(frutaCount);
