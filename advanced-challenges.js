@@ -352,49 +352,88 @@ function generateMatrix(number) {
 const elementsInMatrix = 3;
 // console.log(generateMatrix(elementsInMatrix));
 
-function findWrongWayFruit() {
+//===========================================================================
+//Challenge 16 - Find the wrong way fruit
+
+function findWrongWayFruit(orchard) {
   // Your code goes here...
-  if (orchard < 3) {
-    return 0;
-  }
-  //From line 366 - 372 we are sorting out the most common value
-  //Given that all the fruits in the orchard are apples, the one
-  //that we need to find index of will be the fruit that is spelled
-  //backwards, which will be the most uncommon value.
-  //So the whole new Map() and for...of loop is just to single out
-  //that words spelled backwards.
-  const fruitCounts = new Map();
+  if (orchard.length <= 3) return 0;
+  const fruitMap = new Map();
+
   for (const fruit of orchard) {
-    if (!fruitCounts.has(fruit)) {
-      fruitCounts.set(fruit, 0);
-    }
-    fruitCounts.set(fruit, fruitCounts.get(fruit) + 1);
-    /*
-An equivalent to the above code: 
-
-for (const fruit of orchard) {
-  const added = fruitCounts.get(fruit) || 0;
-  fruitCounts.set(fruit, added + 1);
-}*/
+    const countHolder = fruitMap.get(fruit) || 0;
+    fruitMap.set(fruit, countHolder + 1);
   }
 
-  // Find the most common fruit.
-  const mostCommonFruit = Array.from(fruitCounts.keys()).find(
-    (fruit) => fruitCounts.get(fruit) === Math.max(...fruitCounts.values())
+  const lessCommon = Array.from(fruitMap.keys()).find(
+    (element) => fruitMap.get(element) === Math.min(...fruitMap.values())
   );
 
-  // Find the index of the wrong fruit.
-  return orchard.findIndex((fruit) => fruit !== mostCommonFruit);
+  return orchard.indexOf(lessCommon);
 }
-// console.log(findWrongWayFruit(orchard));
 
-const orchard = ["apple", "apple", "apple", "elppa", "apple", "apple"];
+const fruits = ["apple", "apple", "apple", "apple", "elppa", "apple"];
 
-const frutaCount = new Map();
+// console.log(findWrongWayFruit(fruits));
 
-for (const fruit of orchard) {
-  const count = frutaCount.get(fruit) || 0;
-  frutaCount.set(fruit, count + 1);
-  // console.log(count);
+//==========================================================================
+//Challenge 17 - DNA Pairs (solved)
+/*
+1- Function takes a str of DNA 
+2- Returns array containing correctly  matched DNA
+*/
+
+const dna = "catyq";
+
+function dnaPairs(dnaString) {
+  // Your code goes here...
+  const strCasing = dnaString.toUpperCase();
+  const divideFilter = Array.from(strCasing).filter(
+    (element) =>
+      element === "G" || element === "C" || element === "T" || element === "A"
+  );
+  const arrPairs = [];
+  let dnaPairs;
+  for (let i in divideFilter) {
+    if (divideFilter[i] === "G") {
+      dnaPairs = divideFilter[i] + "C";
+    } else if (divideFilter[i] === "C") {
+      dnaPairs = divideFilter[i] + "G";
+    } else if (divideFilter[i] === "T") {
+      dnaPairs = divideFilter[i] + "A";
+    } else {
+      dnaPairs = divideFilter[i] + "T";
+    }
+    arrPairs.push(dnaPairs);
+  }
+  return arrPairs;
 }
-console.log(frutaCount);
+
+// console.log(dnaPairs(dna));
+//================================================================================
+//Challenge 18 - Tallying Hashtags and Mentions
+/*
+1- Function takes a string 
+2- String contains numbers of mentions and hashtags on Twitter
+3- Function should return an object with hashtag:number, mentions:number items.
+*/
+
+const tagsAndMentions =
+  "So excited to start at @northcoders on Monday! #learntocode #codingbootcamp";
+
+function tallyHashtagsAndMentions(str) {
+  const count = {};
+  let hashtagCount = 0;
+  let mentionCount = 0;
+
+  for (const word in str) {
+    if (str.length > 1 && str[word].startsWith("#")) hashtagCount++;
+    if (str.length > 1 && str[word].startsWith("@")) mentionCount++;
+    count.hashtags = hashtagCount;
+    count.mentions = mentionCount;
+  }
+  count.hashtags = hashtagCount;
+  count.mentions = mentionCount;
+  return count;
+}
+console.log(tallyHashtagsAndMentions(tagsAndMentions));
